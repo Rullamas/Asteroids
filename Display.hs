@@ -8,9 +8,11 @@ import Designs
 myPoints :: [(GLfloat,GLfloat,GLfloat)]
 myPoints = [ (sin (2*pi*k/12), cos (2*pi*k/12), 0) | k <- [1..12] ]
  
-display :: DisplayCallback
-display = do 
+display ::IORef GLfloat -> IORef (GLfloat, GLfloat) -> DisplayCallback
+display rotate pos = do 
   clear [ColorBuffer]
-  ship
+  a <- get rotate
+  b <- get pos
+  ship a b
   flush
-  swapBuffers -- Refreshes screen, necessary when double buffered. 
+  swapBuffers -- Refreshes screen, necessary when double buffered.
