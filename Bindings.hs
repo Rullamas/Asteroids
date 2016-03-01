@@ -3,19 +3,28 @@ module Bindings (idle, display, reshape, keyboardMouse) where
 import Graphics.UI.GLUT
 import Data.IORef
 import Display
+import Types
  
 reshape :: ReshapeCallback
 reshape size = do 
   viewport $= (Position 0 0, size)
  
-keyboardMouse :: IORef GLfloat -> IORef (GLfloat,GLfloat) -> KeyboardMouseCallback
-keyboardMouse a b _key _state _modifiers _position = case _key of
-   (Char 'w') -> b $~! \(x,y) -> (x,y+0.01)
-   (Char 's') -> b $~! \(x,y) -> (x,y-0.01)
+keyboardMouse :: IOGLfPair -> IOGLf -> KeyboardMouseCallback
+keyboardMouse delta shipAngle _key _state _modifiers _position = case _key of
+   (Char 'w') -> delta $~! \(x,y) -> (x,y+0.001)
+   --(Char 's') -> delta $~! \(x,y) -> (x,y-0.001)
+   (Char 'a') -> shipAngle $~! \x -> (x + 0.001)
+   (Char 'd') -> shipAngle $~! \x -> x - 0.001
+   (SpecialKey KeyUp   ) -> delta $~! \(x,y) -> (x,y+0.001)
+   --(SpecialKey KeyDown ) -> delta $~! \(x,y) -> (x,y-0.001)
+   (SpecialKey KeyLeft ) -> shipAngle $~! \x -> (x + 0.001)
+   (SpecialKey KeyRight) -> shipAngle $~! \x -> x - 0.001
    _ -> return ()
 
-idle :: IORef GLfloat -> IORef GLfloat -> IdleCallback
-idle angle change = do
-   d <- get change
-   angle $~! (+ d)
+idle :: IOGLfPair -> IOGLfPair -> IOGLf -> IOGLf -> IdleCallback
+idle pos delta shipAngle shipAngleDelta= do
+   (dx, dy) <- get delta
+   pos $~! \(x, y) -> (x + dx, y + dy)
+   sad <- get shipAngleDelta
+   shipAngle $~! (+ sad)
    postRedisplay Nothing

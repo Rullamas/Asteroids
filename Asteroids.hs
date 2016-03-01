@@ -9,10 +9,11 @@ main = do
   initialWindowSize $= Size 700 700
   _window <- createWindow "Asteroids"
   reshapeCallback $= Just reshape
-  rotate <- newIORef 0.0
-  change <- newIORef 0.1
   pos <- newIORef (0,0.05)
-  keyboardMouseCallback $= Just (keyboardMouse rotate pos)
-  idleCallback $= Just (idle rotate change)
-  displayCallback $= display rotate pos
+  delta <- newIORef (0,0)
+  shipAngle <- newIORef 0.0
+  shipAngleDelta <- newIORef 0.0
+  keyboardMouseCallback $= Just (keyboardMouse delta shipAngleDelta)
+  idleCallback $= Just (idle pos delta shipAngle shipAngleDelta)
+  displayCallback $= display pos shipAngle
   mainLoop
