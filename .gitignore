@@ -1,3 +1,5 @@
 /*.o
 /*.hi
 Asteroids
+*/.idea/*
+*/.idea/workspace.xml

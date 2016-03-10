@@ -10,6 +10,10 @@ import Graphics.Gloss.Interface.Pure.Display
 import Callbacks
 
 main = play
+       (InWindow 
+           "Asteroids" 
+           (800,800) 
+           (0,0))
        black
        60
        initialWorldCallback
