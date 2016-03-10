@@ -1,1 +1,0 @@
-ghc --make -opt1-mwindows Asteroids.hs
