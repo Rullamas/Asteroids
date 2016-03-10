@@ -26,5 +26,14 @@ rotateL (x, y) = (x * cos 0.3 - y * sin 0.3, x * sin 0.3 + y * cos 0.3)
 rotateR :: Point -> Point
 rotateR (x, y) = (x * cos (-0.3) - y * sin (-0.3), x * sin (-0.3) + y * cos (-0.3))
 
+rotateB :: Float -> Point -> Point
+rotateB r (x, y) = (x * cos r - y * sin r
+                   ,x * sin r + y * cos r)
+                   
 -- Revelation: Ship needs to have an angle at all times that the outline can always be deduced from.
 -- This angle would also help with knowing how to increase the velocity. 
+
+-- Hit Asteroids split into two
+asteroidHit :: Asteroid -> [Asteroid]
+asteroidHit (Asteroid loc spe siz) = [Asteroid loc (3 * rotateB (pi/3) spe) (siz/2)
+                                    ,Asteroid loc (3 * rotateB (pi/3) spe) (siz/2)]

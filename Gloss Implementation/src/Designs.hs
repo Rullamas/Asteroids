@@ -36,6 +36,9 @@ initialShip = Ship (0,0) (0,0) [(0, 20),
 initialRockList :: Asteroids
 initialRockList = [Asteroid (200,200) (-10, -8) 30,
                   Asteroid (-150,200) (13, 5) 40]
+                 -- Asteroid (40,20) (-2, 8) 20,
+                 -- Asteroid (400,600) (5, -6) 30,
+                 -- Asteroid (550,150) (2, -10) 40
 
 -- For the drawPictureCallback to translate the ship into a picture.
 convertShip :: Ship -> Picture
