@@ -18,11 +18,12 @@ type Life = Float
 type Asteroids = [Asteroid]
 type Bullets = [Bullet]
 type Pictures = [Picture]
+type Outline = [Point]
 
 -- Data type to define the objects in the game
 data Game = Continue Ship Bullets Asteroids | End deriving (Eq, Show)
 
 -- Object types
-data Ship = Ship Location Speed deriving (Eq, Show)
+data Ship = Ship Location Speed Outline deriving (Eq, Show)
 data Asteroid = Asteroid Location Speed Size deriving (Eq, Show)
 data Bullet = Bullet Location Speed Life deriving (Eq, Show)

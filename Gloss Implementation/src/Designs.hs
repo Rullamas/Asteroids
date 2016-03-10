@@ -23,6 +23,15 @@ import Types
 --           (0.045, -0.06, 0), (-0.035, -0.07, 0), (-0.05, -0.025, 0), (-0.04, 0.025, 0),
 --           (-0.02, 0.035, 0), (-0.015, 0.005, 0)]
 
+
+-- To start the game off with.
+initialShip :: Ship
+initialShip = Ship (0,0) (0,0) [(0, 20),
+                                (12, - 20),
+                                (10, -15),
+                                (-10, -15),
+                                (-12, -20)]
+
 -- To start the game off with.
 initialRockList :: Asteroids
 initialRockList = [Asteroid (200,200) (-10, -8) 30,
@@ -30,12 +39,8 @@ initialRockList = [Asteroid (200,200) (-10, -8) 30,
 
 -- For the drawPictureCallback to translate the ship into a picture.
 convertShip :: Ship -> Picture
-convertShip (Ship (x,y) _) =
-    color white (lineLoop [(x, y + 20),
-                           (x + 12, y - 20),
-                           (x + 10, y - 15),
-                           (x - 10, y - 15),
-                           (x - 12, y - 20)])
+convertShip (Ship _ _ outline) =
+    color white (lineLoop outline)
 
 
 -- For the drawPictureCallback to translate a list of asteroids into pictures.

@@ -16,7 +16,7 @@ import Functions
 -- The ship is in the middle with zero speed, it has not shot any bullets, and the initial
 -- set of asteroids is placed on screen.
 initialWorldCallback :: Game
-initialWorldCallback = Continue (Ship (0,0) (0,0)) [] initialRockList
+initialWorldCallback = Continue initialShip [] initialRockList
 
 -- Each time the game refreshes, it draws based on this callback.
 -- The current values of the game are used in determining what to draw.
