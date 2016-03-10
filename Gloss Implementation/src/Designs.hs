@@ -27,15 +27,15 @@ import Types
 -- To start the game off with.
 initialShip :: Ship
 initialShip = Ship (0,0) (0,0) [(0, 20),
-                                (12, - 20),
-                                (10, -15),
-                                (-10, -15),
-                                (-12, -20)]
+                                    (12, - 20),
+                                    (10, -15),
+                                    (-10, -15),
+                                    (-12, -20)]
 
 -- To start the game off with.
-initialRockList :: Asteroids
-initialRockList = [Asteroid (200,200) (-10, -8) 30,
-                  Asteroid (-150,200) (13, 5) 40]
+initialAsteroidList :: Asteroids
+initialAsteroidList = [Asteroid (200,200) (-10, -8) 30,
+                       Asteroid (-150,200) (13, 5) 40]
 
 -- For the drawPictureCallback to translate the ship into a picture.
 convertShip :: Ship -> Picture

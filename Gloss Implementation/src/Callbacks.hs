@@ -16,7 +16,7 @@ import Functions
 -- The ship is in the middle with zero speed, it has not shot any bullets, and the initial
 -- set of asteroids is placed on screen.
 initialWorldCallback :: Game
-initialWorldCallback = Continue initialShip [] initialRockList
+initialWorldCallback = Continue initialShip [] initialAsteroidList
 
 -- Each time the game refreshes, it draws based on this callback.
 -- The current values of the game are used in determining what to draw.
@@ -42,7 +42,7 @@ keyboardMouseCallback (EventKey (Char 'd') Down _ _) (Continue ship b a) =
 keyboardMouseCallback _ game = game
        
 -- This callback is used in incrementing the game. It is similar to the IdleCallback in that
--- it refreshing at a constant rate, performing the actions in the callback each time.
+-- it's refreshing at a constant rate, performing the actions in the callback each time.
 stepWorldCallback :: Float -> Game -> Game
 stepWorldCallback interval (Continue ship b a) =
     Continue (updateShip ship interval) b a
