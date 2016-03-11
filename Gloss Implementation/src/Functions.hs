@@ -49,3 +49,22 @@ rotateB r (x, y) = (x * cos r - y * sin r
 asteroidHit :: Asteroid -> [Asteroid]
 asteroidHit (Asteroid loc spe siz) = [Asteroid loc (3 * rotateB (pi/3) spe) (siz/2)
                                     ,Asteroid loc (3 * rotateB (pi/3) spe) (siz/2)]
+
+refreshScreen :: Point -> Point
+refreshScreen (x, y) = (newCoords x, newCoords y)
+
+newCoords :: (Ord a, Num a) => a -> a
+newCoords x
+    | x < (-400) = 800 + x
+    | x > 400    = x - 800
+    | otherwise  = x
+
+(.-) , (.+) :: Point -> Point -> Point
+(x,y) .- (u,v) = (x-u,y-v)
+(x,y) .+ (u,v) = (x+u,y+v)
+
+(.*) :: Float -> Point -> Point
+s .* (u,v) = (s*u,s*v)
+
+infixl 6 .- , .+
+infixl 7 .*

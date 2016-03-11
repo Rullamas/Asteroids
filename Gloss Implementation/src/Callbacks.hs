@@ -47,7 +47,13 @@ keyboardMouseCallback _ game = game
 -- it's refreshing at a constant rate, performing the actions in the callback each time.
 stepWorldCallback :: Float -> Game -> Game
 stepWorldCallback interval (Continue ship b a) =
-    Continue (updateShip ship interval) b a
+    Continue (updateShip ship interval) b (concatMap updateAst a)
+
+    where
+    
+        updateAst :: Asteroid -> [Asteroid]
+        updateAst r@(Asteroid loc speed size)
+         = [Asteroid (refreshScreen (loc .+ interval .* speed)) speed size]
 
 
 stepWorldCallback _ game = game
