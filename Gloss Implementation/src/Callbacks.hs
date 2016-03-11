@@ -39,6 +39,8 @@ keyboardMouseCallback (EventKey (Char 'a') Down _ _) (Continue ship b a) =
 keyboardMouseCallback (EventKey (Char 'd') Down _ _) (Continue ship b a) =
     Continue (rotateRight ship) b a
 
+--keyboardMouseCallback (EventKey (KeySpace) Down _ shipPos)
+    
 keyboardMouseCallback _ game = game
        
 -- This callback is used in incrementing the game. It is similar to the IdleCallback in that
