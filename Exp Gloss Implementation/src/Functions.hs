@@ -71,6 +71,10 @@ processMovement (Ship loc angle speed picture thrust angacc) =
          thrust
          angacc
 
+-- processBul :: Bullet -> Bullet
+-- processBul (Bullet loc speed life) =
+--    Bullet loc speed life
+
 -- Takes the pre-processed values and update the frame of reference to match.
 updatePicture :: Ship -> Ship
 updatePicture (Ship (x, y) angle s picture t c) =
@@ -87,6 +91,13 @@ rotateShip angacc (Ship l a s p t c) =
 updateShip :: Float -> Ship -> Ship
 updateShip interval ship =
     updatePicture $ processMovement ship
+
+-- shootBullet :: Speed -> Bullet -> Bullet
+-- shootBullet s b = updateBul $ processBul b
+
+-- updateBul :: Bullet -> Bullet
+-- updateBul (Bullet (x,y) speed life) =
+--    Bullet (calcLocation (x,y) speed) speed life
 
 -- Helper Fucntions
 
@@ -122,15 +133,6 @@ polarToPoint length angle = rotateSingle angle (length, 0)
 -- To add two points together. Useful in calcSpeed.
 addPoints :: Point -> Point -> Point
 addPoints (x, y) (a, b) = (x + a, y + b)
-
-
-
-
-
-
-
-
-
 
 
 

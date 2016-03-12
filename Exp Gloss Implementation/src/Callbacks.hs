@@ -48,7 +48,8 @@ keyboardMouseCallback (EventKey (Char 'd') Down _ _) (Continue ship b a) =
 keyboardMouseCallback (EventKey (Char 'd') Up _ _) (Continue ship b a) =
     Continue (rotateShip (0) ship) b a
 
---keyboardMouseCallback (EventKey (KeySpace) Down _ shipPos)
+-- keyboardMouseCallback (EventKey (Char ' ') Down _ _) (Continue ship b a) =
+--    shootBullet 5 b
     
 keyboardMouseCallback _ game = game
        
