@@ -39,7 +39,11 @@ keyboardMouseCallback (EventKey (Char 'a') Down _ _) (Continue ship b a) =
 keyboardMouseCallback (EventKey (Char 'd') Down _ _) (Continue ship b a) =
     Continue (rotateRight ship) b a
 
---keyboardMouseCallback (EventKey (KeySpace) Down _ shipPos)
+keyboardMouseCallback (EventKey (Char 's') Down _ shipPos) (Continue (Ship ship speed outline) b a) =
+    Continue (Ship ship speed outline) (createBullet : b) a
+    
+    where
+        createBullet = Bullet shipPos(-1 .* shipPos) 0
     
 keyboardMouseCallback _ game = game
        
@@ -47,7 +51,7 @@ keyboardMouseCallback _ game = game
 -- it's refreshing at a constant rate, performing the actions in the callback each time.
 stepWorldCallback :: Float -> Game -> Game
 stepWorldCallback interval (Continue ship b a) =
-    Continue (updateShip ship interval) b (concatMap updateAst a)
+    Continue (updateShip ship interval) (concat (map newBullet b)) (concatMap updateAst a)
 
     where
     
@@ -55,5 +59,9 @@ stepWorldCallback interval (Continue ship b a) =
         updateAst r@(Asteroid loc speed size)
          = [Asteroid (refreshScreen (loc .+ interval .* speed)) speed size]
 
-
+        newBullet :: Bullet -> [Bullet]
+        newBullet (Bullet loc speed lif)
+         | lif > 3 = []
+         | otherwise = [Bullet (refreshScreen (loc .+ interval .* speed)) speed (lif + interval)]
+         
 stepWorldCallback _ game = game
