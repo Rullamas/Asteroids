@@ -18,3 +18,9 @@ To run:
          ghc Asteroids.hs
    4) Run the executable
          Asteroids
+         
+To play:
+   'w' moves your ship forward
+   'a' rotates your ship to the left
+   'd' rotates your ship to the right
+   's' fires bullets from your ship
