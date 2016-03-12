@@ -39,11 +39,11 @@ keyboardMouseCallback (EventKey (Char 'a') Down _ _) (Continue ship b a) =
 keyboardMouseCallback (EventKey (Char 'd') Down _ _) (Continue ship b a) =
     Continue (rotateRight ship) b a
 
-keyboardMouseCallback (EventKey (Char 's') Down _ shipPos) (Continue (Ship ship speed outline) b a) =
+keyboardMouseCallback (EventKey (Char 's') Down _ _) (Continue (Ship ship speed outline) b a) =
     Continue (Ship ship speed outline) (createBullet : b) a
     
     where
-        createBullet = Bullet shipPos(-1 .* shipPos) 0
+        createBullet = Bullet ship (1 .* ship) 0
     
 keyboardMouseCallback _ game = game
        
